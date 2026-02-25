@@ -64,9 +64,6 @@ export function LoginScreen() {
             <Text style={{ color: '#fff', fontSize: 28, fontWeight: '700', letterSpacing: -0.5, textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 4 }}>
               Mind Ease
             </Text>
-            <Text style={{ color: 'rgba(255,255,255,0.85)', fontSize: 14, marginTop: 4, fontWeight: '300', letterSpacing: 0.5 }}>
-              Foco pensado para você
-            </Text>
           </View>
 
           {/* Card glassmorphism */}
