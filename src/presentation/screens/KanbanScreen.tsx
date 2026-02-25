@@ -53,6 +53,24 @@ export function KanbanScreen() {
     ]);
   };
 
+  const STATUS_ORDER: TaskStatus[] = ['todo', 'doing', 'done'];
+
+  const handleMove = async (task: Task, direction: 'left' | 'right') => {
+    const currentIndex = STATUS_ORDER.indexOf(task.status);
+    const nextIndex = direction === 'right' ? currentIndex + 1 : currentIndex - 1;
+    if (nextIndex < 0 || nextIndex >= STATUS_ORDER.length) return;
+    const newStatus = STATUS_ORDER[nextIndex];
+    if (direction === 'right' && newStatus === 'doing') {
+      const doingTasks = tasksByStatus['doing'].length;
+      const maxDoing = config.maxTasksInDoing;
+      if (maxDoing !== undefined && doingTasks >= maxDoing) {
+        Alert.alert('Limite atingido', `O limite de tarefas em andamento é ${maxDoing}.`);
+        return;
+      }
+    }
+    await editTask(task.id, { status: newStatus });
+  };
+
   const handleSubmit = async (data: Omit<Task, 'id' | 'userId' | 'createdAt' | 'completedPomodoros'>) => {
     if (editTarget) {
       await editTask(editTarget.id, data);
@@ -124,6 +142,8 @@ export function KanbanScreen() {
             onTaskPress={handleEditTask}
             onStartPomodoro={(task) => navigation.navigate('Pomodoro', { taskId: task.id })}
             onAddTask={() => handleAddTask(status)}
+            onMoveLeft={status !== 'todo' ? (task) => handleMove(task, 'left') : undefined}
+            onMoveRight={status !== 'done' ? (task) => handleMove(task, 'right') : undefined}
           />
         ))}
       </ScrollView>

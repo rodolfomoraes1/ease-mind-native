@@ -10,10 +10,12 @@ interface KanbanColumnProps {
   maxTasks?: number;
   onTaskPress(task: Task): void;
   onStartPomodoro(task: Task): void;
+  onMoveLeft?(task: Task): void;
+  onMoveRight?(task: Task): void;
   onAddTask?(): void;
 }
 
-export function KanbanColumn({ status, tasks, maxTasks, onTaskPress, onStartPomodoro, onAddTask }: KanbanColumnProps) {
+export function KanbanColumn({ status, tasks, maxTasks, onTaskPress, onStartPomodoro, onMoveLeft, onMoveRight, onAddTask }: KanbanColumnProps) {
   const label = TASK_STATUS_LABELS[status];
   const colorHex = TASK_STATUS_COLORS[status];
   const isAtLimit = maxTasks !== undefined && tasks.length >= maxTasks;
@@ -82,6 +84,8 @@ export function KanbanColumn({ status, tasks, maxTasks, onTaskPress, onStartPomo
             task={task}
             onPress={() => onTaskPress(task)}
             onStartPomodoro={() => onStartPomodoro(task)}
+            onMoveLeft={onMoveLeft ? () => onMoveLeft(task) : undefined}
+            onMoveRight={onMoveRight ? () => onMoveRight(task) : undefined}
           />
         ))}
       </ScrollView>

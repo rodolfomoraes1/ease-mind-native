@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import type { Task } from '@/shared/types/task';
-import { COGNITIVE_LOAD_COLORS, TASK_STATUS_LABELS } from '@/shared/constants/task';
+import { COGNITIVE_LOAD_COLORS } from '@/shared/constants/task';
 
 interface TaskCardProps {
   task: Task;
   onPress?(): void;
   onStartPomodoro?(): void;
+  onMoveLeft?(): void;
+  onMoveRight?(): void;
   rightAction?: React.ReactNode;
 }
 
-import { TouchableOpacity } from 'react-native';
-
-export function TaskCard({ task, onPress, onStartPomodoro, rightAction }: TaskCardProps) {
+export function TaskCard({ task, onPress, onStartPomodoro, onMoveLeft, onMoveRight, rightAction }: TaskCardProps) {
   const loadColor = COGNITIVE_LOAD_COLORS[task.cognitiveLoad];
   const pomodoroProgress = task.estimatedPomodoros > 0
     ? Math.min((task.completedPomodoros / task.estimatedPomodoros) * 100, 100)
@@ -71,6 +72,30 @@ export function TaskCard({ task, onPress, onStartPomodoro, rightAction }: TaskCa
             </Text>
           </View>
         </View>
+
+        {/* Botões de mover entre colunas */}
+        {(onMoveLeft || onMoveRight) && (
+          <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 6, marginTop: 10, paddingTop: 8, borderTopWidth: 1, borderTopColor: '#F3F4F6' }}>
+            {onMoveLeft && (
+              <TouchableOpacity
+                onPress={onMoveLeft}
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: '#F3F4F6', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 5 }}
+              >
+                <Ionicons name="arrow-back" size={13} color="#6B7280" />
+                <Text style={{ fontSize: 11, color: '#6B7280', fontWeight: '600' }}>Voltar</Text>
+              </TouchableOpacity>
+            )}
+            {onMoveRight && (
+              <TouchableOpacity
+                onPress={onMoveRight}
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: '#667EEA', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 5 }}
+              >
+                <Text style={{ fontSize: 11, color: '#fff', fontWeight: '600' }}>Avançar</Text>
+                <Ionicons name="arrow-forward" size={13} color="#fff" />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
