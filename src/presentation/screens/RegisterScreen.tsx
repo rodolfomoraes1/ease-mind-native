@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -55,15 +55,11 @@ export function RegisterScreen() {
         >
           {/* Logo */}
           <View style={{ alignItems: 'center', marginBottom: 28 }}>
-            <View style={{
-              width: 72, height: 72, borderRadius: 36,
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              alignItems: 'center', justifyContent: 'center',
-              marginBottom: 10,
-              borderWidth: 2, borderColor: 'rgba(255,255,255,0.4)',
-            }}>
-              <Text style={{ fontSize: 36 }}>🧠</Text>
-            </View>
+            <Image
+              source={require('../../../assets/icone-512-512.png')}
+              style={{ width: 72, height: 72, marginBottom: 10 }}
+              resizeMode="contain"
+            />
             <Text style={{ color: '#fff', fontSize: 24, fontWeight: '700', letterSpacing: -0.5 }}>Mind Ease</Text>
             <Text style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, marginTop: 2 }}>Crie sua conta gratuitamente</Text>
           </View>

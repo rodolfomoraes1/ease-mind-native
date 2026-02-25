@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="url(#gradient_small)" />
+  
+  <!-- Livro + cabeça -->
+  <path d="M156 156L256 206L356 156V356L256 406L156 356V156Z" 
+        fill="white" fill-opacity="0.95" />
+  <circle cx="256" cy="131" r="40" fill="white" fill-opacity="0.95" />
+  
+  <!-- Elementos de foco -->
+  <circle cx="206" cy="256" r="8" fill="#FFD93D" />
+  <circle cx="256" cy="306" r="8" fill="#6BCB77" />
+  <circle cx="306" cy="256" r="8" fill="#4D96FF" />
+  
+  <defs>
+    <linearGradient id="gradient_small" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667EEA"/>
+      <stop offset="1" stop-color="#764BA2"/>
+    </linearGradient>
+  </defs>
+</svg>

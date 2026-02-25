@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
@@ -55,15 +56,11 @@ export function LoginScreen() {
         >
           {/* Logo */}
           <View style={{ alignItems: 'center', marginBottom: 32 }}>
-            <View style={{
-              width: 88, height: 88, borderRadius: 44,
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              alignItems: 'center', justifyContent: 'center',
-              marginBottom: 12,
-              borderWidth: 2, borderColor: 'rgba(255,255,255,0.4)',
-            }}>
-              <Text style={{ fontSize: 44 }}>🧠</Text>
-            </View>
+            <Image
+              source={require('../../../assets/icone-512-512.png')}
+              style={{ width: 88, height: 88, marginBottom: 12 }}
+              resizeMode="contain"
+            />
             <Text style={{ color: '#fff', fontSize: 28, fontWeight: '700', letterSpacing: -0.5, textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 4 }}>
               Mind Ease
             </Text>

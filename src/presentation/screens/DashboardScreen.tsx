@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useAuth } from '@/presentation/contexts/AuthContext';
@@ -35,7 +36,7 @@ function StatCard({ label, value, color }: { label: string; value: string | numb
   );
 }
 
-function QuickAction({ emoji, title, subtitle, onPress }: { emoji: string; title: string; subtitle: string; onPress(): void }) {
+function QuickAction({ icon, title, subtitle, onPress }: { icon: React.ReactNode; title: string; subtitle: string; onPress(): void }) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -48,12 +49,14 @@ function QuickAction({ emoji, title, subtitle, onPress }: { emoji: string; title
         borderWidth: 1, borderColor: '#F3F4F6',
       }}
     >
-      <Text style={{ fontSize: 26, marginRight: 16 }}>{emoji}</Text>
+      <View style={{ width: 42, height: 42, borderRadius: 12, backgroundColor: '#EEF2FF', alignItems: 'center', justifyContent: 'center', marginRight: 16 }}>
+        {icon}
+      </View>
       <View style={{ flex: 1 }}>
         <Text style={{ fontWeight: '700', color: '#1F2937', fontSize: 15 }}>{title}</Text>
         <Text style={{ color: '#6B7280', fontSize: 13, marginTop: 1 }}>{subtitle}</Text>
       </View>
-      <Text style={{ color: '#D1D5DB', fontSize: 22, fontWeight: '300' }}>›</Text>
+      <Ionicons name="chevron-forward" size={20} color="#D1D5DB" />
     </TouchableOpacity>
   );
 }
@@ -121,7 +124,7 @@ export function DashboardScreen() {
           <StatCard label="A Fazer" value={todoCount} color="#667EEA" />
           <StatCard label="Andamento" value={doingCount} color="#F6AD55" />
           <StatCard label="Concluídas" value={doneCount} color="#48BB78" />
-          <StatCard label="🍅 Foco" value={totalPomodoros} color="#EF4444" />
+          <StatCard label="Foco" value={totalPomodoros} color="#EF4444" />
         </View>
 
         <View style={{ paddingHorizontal: 16 }}>
@@ -164,9 +167,9 @@ export function DashboardScreen() {
 
           {/* Ações rápidas */}
           <Text style={{ fontWeight: '700', color: '#374151', fontSize: 15, marginBottom: 12 }}>Ações Rápidas</Text>
-          <QuickAction emoji="📋" title="Quadro Kanban" subtitle="Gerencie suas tarefas" onPress={() => navigation.navigate('Kanban')} />
-          <QuickAction emoji="🍅" title="Pomodoro" subtitle="Iniciar sessão de foco" onPress={() => navigation.navigate('Pomodoro')} />
-          <QuickAction emoji="⚙️" title="Configurações" subtitle="Preferências cognitivas" onPress={() => navigation.navigate('Settings')} />
+          <QuickAction icon={<Ionicons name="albums-outline" size={22} color="#667EEA" />} title="Quadro Kanban" subtitle="Gerencie suas tarefas" onPress={() => navigation.navigate('Kanban')} />
+          <QuickAction icon={<Ionicons name="timer-outline" size={22} color="#667EEA" />} title="Pomodoro" subtitle="Iniciar sessão de foco" onPress={() => navigation.navigate('Pomodoro')} />
+          <QuickAction icon={<Ionicons name="settings-outline" size={22} color="#667EEA" />} title="Configurações" subtitle="Preferências cognitivas" onPress={() => navigation.navigate('Settings')} />
         </View>
       </ScrollView>
     </SafeAreaView>

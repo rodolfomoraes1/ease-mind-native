@@ -3,7 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { useAuth } from '@/presentation/contexts/AuthContext';
 import { LoginScreen } from '@/presentation/screens/LoginScreen';
@@ -41,12 +41,6 @@ function AuthNavigator() {
   );
 }
 
-function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
-  return (
-    <Text style={{ fontSize: 22, opacity: focused ? 1 : 0.5 }}>{emoji}</Text>
-  );
-}
-
 function MainNavigator() {
   return (
     <MainTabs.Navigator
@@ -72,7 +66,7 @@ function MainNavigator() {
         component={DashboardScreen}
         options={{
           tabBarLabel: 'Início',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🏠" focused={focused} />,
+          tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color} />,
         }}
       />
       <MainTabs.Screen
@@ -80,7 +74,7 @@ function MainNavigator() {
         component={KanbanScreen}
         options={{
           tabBarLabel: 'Tarefas',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="📋" focused={focused} />,
+          tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? 'albums' : 'albums-outline'} size={22} color={color} />,
         }}
       />
       <MainTabs.Screen
@@ -88,7 +82,7 @@ function MainNavigator() {
         component={PomodoroScreen}
         options={{
           tabBarLabel: 'Pomodoro',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🍅" focused={focused} />,
+          tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? 'timer' : 'timer-outline'} size={22} color={color} />,
         }}
       />
       <MainTabs.Screen
@@ -96,7 +90,7 @@ function MainNavigator() {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Config.',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="⚙️" focused={focused} />,
+          tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? 'settings' : 'settings-outline'} size={22} color={color} />,
         }}
       />
     </MainTabs.Navigator>

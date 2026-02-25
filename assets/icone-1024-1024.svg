@@ -1,0 +1,36 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo gradiente (mesmas cores) -->
+  <rect width="1024" height="1024" rx="256" fill="url(#gradient)" />
+  
+  <!-- Livro aberto estilizado (base do conhecimento) -->
+  <path d="M312 312L512 412L712 312V712L512 812L312 712V312Z" 
+        fill="white" fill-opacity="0.95" />
+  
+  <!-- Páginas do livro (detalhes) -->
+  <path d="M512 412V812M412 362L512 412M612 362L512 412" 
+        stroke="#667EEA" stroke-width="16" stroke-linecap="round" />
+  
+  <!-- Cabeça/pensamento (elemento humano) -->
+  <circle cx="512" cy="262" r="80" fill="white" fill-opacity="0.95" />
+  
+  <!-- Linhas de foco/atenção (representando TDAH hiperfoco) -->
+  <path d="M212 512L312 512M712 512L812 512M512 212L512 312M512 712L512 812" 
+        stroke="white" stroke-width="12" stroke-opacity="0.6" stroke-linecap="round" />
+  
+  <!-- Pontos de conexão (neurodivergência) -->
+  <circle cx="412" cy="462" r="16" fill="#FFD93D" />  <!-- Amarelo - atenção -->
+  <circle cx="512" cy="562" r="16" fill="#6BCB77" />  <!-- Verde - foco -->
+  <circle cx="612" cy="462" r="16" fill="#4D96FF" />  <!-- Azul - calma -->
+  
+  <!-- Linhas de conexão entre os pontos -->
+  <path d="M412 462L512 562M512 562L612 462M412 462L512 462" 
+        stroke="white" stroke-width="8" stroke-opacity="0.4" />
+  
+  <!-- Gradiente -->
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667EEA"/>
+      <stop offset="1" stop-color="#764BA2"/>
+    </linearGradient>
+  </defs>
+</svg>
