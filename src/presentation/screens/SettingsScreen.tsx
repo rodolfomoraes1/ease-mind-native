@@ -166,7 +166,7 @@ export function SettingsScreen() {
           onToggle={toggleCognitiveAlerts}
         />
 
-        <SectionTitle title="Interface" />
+        {/* <SectionTitle title="Interface" />
         <View style={{
           backgroundColor: '#fff', borderRadius: 16, padding: 16, marginBottom: 8,
           borderWidth: 1, borderColor: '#F3F4F6',
@@ -215,7 +215,7 @@ export function SettingsScreen() {
             value={prefs.complexityLevel}
             onChange={(v) => setComplexityLevel(v)}
           />
-        </View>
+        </View> */}
 
         <SectionTitle title="Alertas" />
         <View style={{

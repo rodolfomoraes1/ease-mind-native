@@ -77,6 +77,9 @@ export function DashboardScreen() {
   const profile = userInfo?.navigationProfile ?? 'beginner';
   const profileBadge = PROFILE_LABEL[profile];
 
+  const focusMode   = userInfo?.cognitivePreferences?.focusMode   ?? false;
+  const summaryMode = userInfo?.cognitivePreferences?.summaryMode ?? false;
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F9FE' }} edges={['top']}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
@@ -128,8 +131,8 @@ export function DashboardScreen() {
         </View>
 
         <View style={{ paddingHorizontal: 16 }}>
-          {/* UserInfo card estilo web — left border #667EEA */}
-          <View style={{
+          {/* UserInfo card — oculto no Modo Resumo */}
+          {!summaryMode && <View style={{
             backgroundColor: '#fff', borderRadius: 16,
             padding: 18, marginBottom: 20,
             borderLeftWidth: 4, borderLeftColor: '#667EEA',
@@ -163,13 +166,29 @@ export function DashboardScreen() {
                 </Text>
               </View>
             )}
-          </View>
+          </View>}
 
-          {/* Ações rápidas */}
-          <Text style={{ fontWeight: '700', color: '#374151', fontSize: 15, marginBottom: 12 }}>Ações Rápidas</Text>
-          <QuickAction icon={<Ionicons name="albums-outline" size={22} color="#667EEA" />} title="Quadro Kanban" subtitle="Gerencie suas tarefas" onPress={() => navigation.navigate('Kanban')} />
-          <QuickAction icon={<Ionicons name="timer-outline" size={22} color="#667EEA" />} title="Pomodoro" subtitle="Iniciar sessão de foco" onPress={() => navigation.navigate('Pomodoro')} />
-          <QuickAction icon={<Ionicons name="settings-outline" size={22} color="#667EEA" />} title="Configurações" subtitle="Preferências cognitivas" onPress={() => navigation.navigate('Settings')} />
+          {/* Ações rápidas — ocultas no Modo Foco */}
+          {focusMode ? (
+            <View style={{
+              backgroundColor: '#EEF2FF', borderRadius: 14,
+              padding: 16, alignItems: 'center',
+              borderWidth: 1, borderColor: '#C7D2FE',
+            }}>
+              <Ionicons name="eye-off-outline" size={22} color="#667EEA" />
+              <Text style={{ color: '#667EEA', fontWeight: '700', fontSize: 14, marginTop: 8 }}>Modo Foco ativo</Text>
+              <Text style={{ color: '#818CF8', fontSize: 12, marginTop: 4, textAlign: 'center' }}>
+                Ações rápidas ocultadas para reduzir distrações.
+              </Text>
+            </View>
+          ) : (
+            <>
+              <Text style={{ fontWeight: '700', color: '#374151', fontSize: 15, marginBottom: 12 }}>Ações Rápidas</Text>
+              <QuickAction icon={<Ionicons name="albums-outline" size={22} color="#667EEA" />} title="Quadro Kanban" subtitle="Gerencie suas tarefas" onPress={() => navigation.navigate('Kanban')} />
+              <QuickAction icon={<Ionicons name="timer-outline" size={22} color="#667EEA" />} title="Pomodoro" subtitle="Iniciar sessão de foco" onPress={() => navigation.navigate('Pomodoro')} />
+              <QuickAction icon={<Ionicons name="settings-outline" size={22} color="#667EEA" />} title="Configurações" subtitle="Preferências cognitivas" onPress={() => navigation.navigate('Settings')} />
+            </>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

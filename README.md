@@ -5,7 +5,7 @@ Hackaton final - Postech Fiap
 Aplicativo mobile do **MindEase** — plataforma de foco e gestão de rotinas para pessoas neurodivergentes e/ou com desafios de processamento cognitivo. Compartilha o mesmo banco de dados Firebase do app web.
 
 ## Competências aplicadas
-- Arquitetura (Clean Architecture, Componentização)
+- Arquitetura em camadas (Componentização, separação de responsabilidades)
 - Desenvolvimento Mobile (React Native, Expo)
 - Acessibilidade digital e cognitiva
 - Boas práticas de código (TypeScript, Clean Code)
@@ -54,19 +54,17 @@ Armazenar preferências como:
 | react-native-reanimated | ~4.1.1 |
 | react-native-svg | 15.12.1 |
 
-### Clean Architecture
+### Arquitetura em camadas
 
 ```
 src/
 ├── shared/               # Tipos, constantes, utilitários e tema
-├── domain/               # Entidades, interfaces e casos de uso
 ├── infrastructure/       # Firebase (config + repositories)
 └── presentation/         # UI (contexts, hooks, components, screens, navigation)
 ```
 
-- Camada de domínio isolada
-- Casos de uso independentes de UI
-- Adaptadores e interfaces claras
+- Separação clara entre acesso a dados (`infrastructure/`) e UI (`presentation/`)
+- Tipos e constantes centralizados em `shared/`, sem duplicação
 - Repositórios desacoplados (authRepository, taskRepository, userRepository, pomodoroRepository)
 
 ## Acessibilidade cognitiva
@@ -132,9 +130,8 @@ npx expo start --ios
 - [x] Acessibilidade cognitiva (níveis, foco, ritmos, carga cognitiva, WIP)
 
 ## Checklist técnico
-- [x] Separação clara entre módulos (domínio, infraestrutura, apresentação)
-- [x] Clean Architecture com domínio isolado
-- [x] Casos de uso independentes de UI
+- [x] Separação clara entre módulos (shared, infraestrutura, apresentação)
+- [x] Arquitetura em camadas com responsabilidades bem definidas
 - [x] Mobile em React Native + Expo
 - [x] Design System (tokens, tipografia, cores, espaçamentos via NativeWind)
 - [x] Acessibilidade cognitiva implementada
