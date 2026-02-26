@@ -126,21 +126,19 @@ npx expo start --ios
 - Subir o link do vídeo e do projeto na plataforma da FIAP em um arquivo `.docx` ou `.txt`
 
 ## Checklist de funcionalidades
-- [ ] Painel cognitivo personalizável
-- [ ] Organizador de tarefas com suporte cognitivo (Kanban + Pomodoro)
-- [ ] Perfil do usuário + configurações persistentes
-- [ ] Acessibilidade cognitiva (níveis, foco, ritmos, carga cognitiva, WIP)
+- [x] Painel cognitivo personalizável
+- [x] Organizador de tarefas com suporte cognitivo (Kanban + Pomodoro)
+- [x] Perfil do usuário + configurações persistentes
+- [x] Acessibilidade cognitiva (níveis, foco, ritmos, carga cognitiva, WIP)
 
 ## Checklist técnico
-- [ ] Separação clara entre módulos (domínio, infraestrutura, apresentação)
-- [ ] Clean Architecture com domínio isolado
-- [ ] Casos de uso independentes de UI
-- [ ] Adaptadores e interfaces claras
-- [ ] Mobile em TypeScript
-- [ ] Mobile em React Native + Expo
-- [ ] Design System (tokens, tipografia, cores, espaçamentos via NativeWind)
-- [ ] Acessibilidade cognitiva implementada
-- [ ] State management com Context API
-- [ ] Segurança: autenticação via Firebase Auth, variáveis de ambiente para credenciais
-- [ ] Eficiência: memoização (useCallback, useMemo), hooks otimizados
-- [ ] Performance: cache local com AsyncStorage, lazy loading de telas
+- [x] Separação clara entre módulos (domínio, infraestrutura, apresentação)
+- [x] Clean Architecture com domínio isolado
+- [x] Casos de uso independentes de UI
+- [x] Mobile em React Native + Expo
+- [x] Design System (tokens, tipografia, cores, espaçamentos via NativeWind)
+- [x] Acessibilidade cognitiva implementada
+- [x] State management com Context API
+- [x] Segurança: autenticação via Firebase Auth, variáveis de ambiente para credenciais
+- [x] Eficiência: memoização (useCallback, useMemo), hooks otimizados
+- [x] Performance: cache local com AsyncStorage, lazy loading de telas

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { taskRepository } from '@/infrastructure/repositories/taskRepository';
 import type { Task, TaskStatus, Subtask } from '@/shared/types/task';
 import { useAuth } from './AuthContext';
@@ -28,12 +29,38 @@ export function TasksProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) { setTasks([]); return; }
     let cancelled = false;
-    setLoading(true);
-    setError(null);
-    taskRepository.getUserTasks(user.uid)
-      .then((data) => { if (!cancelled) setTasks(data); })
-      .catch(() => { if (!cancelled) setError('Não foi possível carregar as tarefas.'); })
-      .finally(() => { if (!cancelled) setLoading(false); });
+    const cacheKey = `tasks_cache_${user.uid}`;
+
+    (async () => {
+      let hasCached = false;
+      try {
+        const raw = await AsyncStorage.getItem(cacheKey);
+        if (raw && !cancelled) {
+          const parsed: Task[] = JSON.parse(raw).map((t: any) => ({
+            ...t,
+            createdAt: new Date(t.createdAt),
+          }));
+          setTasks(parsed);
+          hasCached = true;
+        }
+      } catch {}
+
+      if (!cancelled && !hasCached) setLoading(true);
+      if (!cancelled) setError(null);
+
+      try {
+        const data = await taskRepository.getUserTasks(user.uid);
+        if (!cancelled) {
+          setTasks(data);
+          AsyncStorage.setItem(cacheKey, JSON.stringify(data)).catch(() => {});
+        }
+      } catch {
+        if (!cancelled) setError('Não foi possível carregar as tarefas.');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
     return () => { cancelled = true; };
   }, [user, fetchCount]);
 

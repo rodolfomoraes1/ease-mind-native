@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,14 +6,42 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAuth } from '@/presentation/contexts/AuthContext';
+
 import { LoginScreen } from '@/presentation/screens/LoginScreen';
 import { RegisterScreen } from '@/presentation/screens/RegisterScreen';
 import { DashboardScreen } from '@/presentation/screens/DashboardScreen';
-import { KanbanScreen } from '@/presentation/screens/KanbanScreen';
-import { PomodoroScreen } from '@/presentation/screens/PomodoroScreen';
-import { SettingsScreen } from '@/presentation/screens/SettingsScreen';
 
-// ---- Param lists ----
+const KanbanScreenLazy = React.lazy(() =>
+  import('@/presentation/screens/KanbanScreen').then((m) => ({ default: m.KanbanScreen }))
+);
+const PomodoroScreenLazy = React.lazy(() =>
+  import('@/presentation/screens/PomodoroScreen').then((m) => ({ default: m.PomodoroScreen }))
+);
+const SettingsScreenLazy = React.lazy(() =>
+  import('@/presentation/screens/SettingsScreen').then((m) => ({ default: m.SettingsScreen }))
+);
+
+function ScreenFallback() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <ActivityIndicator size="large" color="#667EEA" />
+    </View>
+  );
+}
+
+function withSuspense(Comp: React.LazyExoticComponent<any>) {
+  return function LazyScreen(props: any) {
+    return (
+      <Suspense fallback={<ScreenFallback />}>
+        <Comp {...props} />
+      </Suspense>
+    );
+  };
+}
+
+const KanbanScreen = withSuspense(KanbanScreenLazy);
+const PomodoroScreen = withSuspense(PomodoroScreenLazy);
+const SettingsScreen = withSuspense(SettingsScreenLazy);
 
 export type AuthStackParamList = {
   Login: undefined;
@@ -26,8 +54,6 @@ export type MainTabsParamList = {
   Pomodoro: { taskId?: string } | undefined;
   Settings: undefined;
 };
-
-// ---- Navigators ----
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const MainTabs = createBottomTabNavigator<MainTabsParamList>();
